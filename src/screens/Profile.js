@@ -4,13 +4,11 @@ import React, { Component } from "react";
 import {
   View,
   Text,
-  AsyncStorage,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from "react-native";
 import api from "../services/api";
-import { TOKEN_KEY } from "../services/auth";
-import axios from "axios";
 
 class Profile extends Component {
   state = {
@@ -23,38 +21,9 @@ class Profile extends Component {
     this.getProfile();
   }
 
-  // getProfile = async () => {
-  //   alert("Recuperando token");
-  //   const token = await AsyncStorage.getItem("user");
-  //   alert("Token recuperado");
-  //   var config = {
-  //     headers: { Authorization: "bearer " + token }
-  //   };
-  //   api
-  //     .get("/profile", {}, config)
-  //     .then(resp => {
-  //       console.log(resp.data);
-  //       const { name, login, email } = resp.data;
-  //       this.setState({ nome: name, login: login, email: email });
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // };
-
   getProfile = async () => {
-    const token = await AsyncStorage.getItem("user");
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token
-        // "Content-Type": "application/json",
-        // Accept: "application/json"
-      }
-    };
-
-    //Rota - parametros - configuracoesem
-    api
-      .get("/profile", config)
+    await api
+      .get("/profile")
       .then(resp => {
         const { name, login, email } = resp.data;
         this.setState({ nome: name, login: login, email: email });
@@ -64,8 +33,8 @@ class Profile extends Component {
       });
   };
 
-  logout = () => {
-    // await AsyncStorage.removeItem("user");
+  logout = async () => {
+    await AsyncStorage.removeItem("user");
     this.props.navigation.navigate("Main");
   };
 
