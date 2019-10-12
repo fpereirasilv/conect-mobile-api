@@ -52,9 +52,9 @@ class Profile extends Component {
       }
     };
 
-    //Rota - parametros - configuracoes
+    //Rota - parametros - configuracoesem
     api
-      .get("/profile", {}, config)
+      .get("/profile", config)
       .then(resp => {
         const { name, login, email } = resp.data;
         this.setState({ nome: name, login: login, email: email });

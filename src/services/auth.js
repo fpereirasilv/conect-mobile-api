@@ -4,13 +4,6 @@ export const TOKEN_KEY = "user";
 export const isAuthenticated = async () =>
   (await AsyncStorage.getItem(TOKEN_KEY)) !== null;
 
-// export const getToken = async () => {
-//   // const gToken =
-//   await AsyncStorage.getItem(TOKEN_KEY);
-//   // alert(gToken);
-//   // return gToken;
-// };
-
 export const getAsyncStorage = async chave => {
   try {
     const tokenValue = await AsyncStorage.getItem(chave);

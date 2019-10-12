@@ -54,7 +54,7 @@ export default class Login extends Component {
           });
           this.props.navigation.navigate("Profile");
 
-          const resultToken = JSON.stringify(this.state.data.token);
+          const resultToken = this.state.data.token;
 
           this.setAsyncStorage(resultToken);
         } else {
@@ -69,12 +69,12 @@ export default class Login extends Component {
       });
   };
 
-  // async componentDidMount() {
-  //   const user = await AsyncStorage.getItem("user");
-  //   if (user && user.length) {
-  //     this.props.navigation.navigate("Profile");
-  //   }
-  // }
+  async componentDidMount() {
+    const user = await AsyncStorage.getItem("user");
+    if (user && user.length) {
+      this.props.navigation.navigate("Profile");
+    }
+  }
 
   render() {
     return (
