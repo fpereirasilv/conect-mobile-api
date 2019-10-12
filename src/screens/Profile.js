@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
-// import Gravatar from 'react-gravatar'
+import { Gravatar } from "react-native-gravatar";
 import {
   View,
   Text,
@@ -41,7 +40,14 @@ class Profile extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Gravatar email={this.state.email} size={100} /> */}
+        <Gravatar
+          options={{
+            email: this.state.email,
+            parameters: { size: "200", d: "mm" },
+            secure: true
+          }}
+          style={styles.roundedProfileImage}
+        />
         <Text>{this.state.nome}</Text>
         <Text>{this.state.login}</Text>
         <Text>{this.state.email}</Text>
@@ -71,6 +77,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 20,
     color: "white"
+  },
+  roundedProfileImage: {
+    width: 100,
+    height: 100,
+    borderWidth: 3,
+    borderColor: "white",
+    borderRadius: 50
   }
 });
 

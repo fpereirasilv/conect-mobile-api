@@ -24,8 +24,7 @@ export default class SignUp extends React.Component {
   signUp = async () => {
     const { name, login, password, email } = this.state;
     if (!name || !login || !email || !password) {
-      // this.setState({ error: "Preencha todos os dados para se cadastrar" });
-      console.log("Preencha todos os dados para se cadastrar");
+      alert("Preencha todos os dados para se cadastrar");
     } else {
       const params = {
         name: name,
@@ -34,13 +33,18 @@ export default class SignUp extends React.Component {
         password: password
       };
 
-      const response = await api
+      await api
         .post("/register", params)
         .then(response => {
-          alert(response.data);
+          if (response.status === 200) {
+            alert(
+              "Cadastro realizado com sucesso, Agora acesse seu email para ativar sua conta."
+            );
+            this.props.navigation.navigate("Main");
+          }
         })
         .catch(error => {
-          console.log(error);
+          alert(error);
         });
     }
   };
