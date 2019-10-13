@@ -44,7 +44,6 @@ export default class SignUp extends React.Component {
           }
         })
         .catch(error => {
-          // this.setState({ error: error.response.data.errors });
           alert(error.response.data.errors);
         });
     }
